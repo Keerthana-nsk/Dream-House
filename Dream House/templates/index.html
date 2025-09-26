@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dream House — Builder (2D + 3D)</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Dream House — Prompt-based Builder</h1>
+  </header>
+
+  <main class="wrap">
+    <section class="left">
+      <label>Project name</label>
+      <input id="projectName" placeholder="My Dream House" value="My Dream House">
+
+      <label>Your prompt / thoughts</label>
+      <textarea id="prompt" placeholder="e.g. 2BHK modern house with balcony and garden, bright colors"></textarea>
+
+      <div class="row">
+        <button id="parseBtn">Generate from Prompt</button>
+        <button id="saveBtn">Save Design</button>
+      </div>
+
+      <div class="controls">
+        <h3>Parsed details (editable)</h3>
+        <div class="grid">
+          <div><label>Bedrooms</label><input id="bedrooms" type="number" min="0" value="2"></div>
+          <div><label>Bathrooms</label><input id="bathrooms" type="number" min="0" value="2"></div>
+          <div><label>Kitchens</label><input id="kitchens" type="number" min="0" value="1"></div>
+          <div><label>Halls</label><input id="halls" type="number" min="0" value="1"></div>
+        </div>
+        <label><input type="checkbox" id="balcony"> Balcony</label>
+        <label><input type="checkbox" id="garden"> Garden</label>
+        <label><input type="checkbox" id="parking"> Parking</label>
+
+        <label>Primary color</label>
+        <input type="color" id="primaryColor" value="#8fbf8f">
+
+        <label>Theme</label>
+        <select id="styleSelect"><option value="modern">Modern</option><option value="traditional">Traditional</option><option value="minimal">Minimal</option></select>
+
+        <div class="row">
+          <button id="regenBtn">Regenerate Layout</button>
+          <button id="exportPng">Download PNG</button>
+        </div>
+      </div>
+
+      <h3>Saved designs</h3>
+      <ul id="savedList"></ul>
+
+    </section>
+
+    <section class="right">
+      <div class="preview-controls">
+        <div class="view-toggle">
+          <label><input type="radio" name="view" value="2d" id="view2d" checked> 2D View</label>
+          <label><input type="radio" name="view" value="3d" id="view3d"> 3D View</label>
+        </div>
+        <h2 id="viewerTitle">Preview</h2>
+      </div>
+
+      <div id="previewArea">
+        <div id="svgWrap">
+          <div id="canvasWrap">
+            <svg id="floorSvg" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet"></svg>
+          </div>
+        </div>
+
+        <div id="threeWrap" class="hidden">
+          <!-- Three.js canvas will be inserted here -->
+          <div id="threeContainer"></div>
+          <div id="threeLegend">
+            <div><span class="legend-box" style="background:#ffffff;border:1px solid #222"></span> Room (walls)</div>
+            <div><span class="legend-box" style="background:#8fbf8f"></span> Floor color</div>
+            <div><span class="legend-box" style="background:#b5651d"></span> Roof</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- html2canvas for PNG export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- main script -->
+  <script src="/static/script.js"></script>
+  <!-- three preview module (must be module) -->
+  <script type="module" src="/static/three-preview.js"></script>
+</body>
+</html>
